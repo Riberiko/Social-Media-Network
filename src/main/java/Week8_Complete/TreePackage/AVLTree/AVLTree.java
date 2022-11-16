@@ -1,10 +1,10 @@
-package Week8_Incomplete.TreePackage.AVLTree;
+package Week8_Complete.TreePackage.AVLTree;
 
 
-import Week8_Incomplete.StackAndQueueInterface.LinkedQueue;
-import Week8_Incomplete.StackAndQueueInterface.QueueInterface;
-import Week8_Incomplete.TreePackage.BinaryNode;
-import Week8_Incomplete.TreePackage.BinarySearchTree.BinarySearchTree;
+import Week8_Complete.StackAndQueueInterface.LinkedQueue;
+import Week8_Complete.StackAndQueueInterface.QueueInterface;
+import Week8_Complete.TreePackage.BinaryNode;
+import Week8_Complete.TreePackage.BinarySearchTree.BinarySearchTree;
 
 import java.util.NoSuchElementException;
 
@@ -82,6 +82,31 @@ public class AVLTree<T extends Comparable<? super T>>
 
     private BinaryNode<T> rebalance(BinaryNode<T> nodeN)
     {
+        int heightDifference = getHeightDifference(nodeN);
+
+        if (heightDifference > 1)
+        {
+            // Left subtree is taller by more than 1,
+            // so addition was in left subtree
+            if (getHeightDifference(nodeN.getLeftChild()) > 0)
+                // Addition was in left subtree of left child
+                nodeN = rotateRight(nodeN);
+            else
+                // Addition was in right subtree of left child
+                nodeN = rotateLeftRight(nodeN);
+        }
+        else if (heightDifference < -1)
+        {
+            // Right subtree is taller by more than 1,
+            // so addition was in right subtree
+            if (getHeightDifference(nodeN.getRightChild()) < 0)
+                // Addition was in right subtree of right child
+                nodeN = rotateLeft(nodeN);
+            else
+                // Addition was in left subtree of right child
+                nodeN = rotateRightLeft(nodeN);
+        } // end if
+        // Else nodeN is balanced
 
         return nodeN;
     } // end rebalance
@@ -89,7 +114,8 @@ public class AVLTree<T extends Comparable<? super T>>
     private BinaryNode<T> rotateRight(BinaryNode<T> nodeN)
     {
         BinaryNode<T> nodeC = nodeN.getLeftChild();
-
+        nodeN.setLeftChild(nodeC.getRightChild());
+        nodeC.setRightChild(nodeN);
         return nodeC;
     } // end rotateRight
 
@@ -100,9 +126,9 @@ public class AVLTree<T extends Comparable<? super T>>
     private BinaryNode<T> rotateLeft(BinaryNode<T> nodeN)
     {
         BinaryNode<T> nodeC = nodeN.getRightChild();
-
+        nodeN.setRightChild(nodeC.getLeftChild());
+        nodeC.setLeftChild(nodeN);
         return nodeC;
-
     } // end rotateLeft
 
     // Corrects an imbalance at the node closest to a structural
@@ -112,9 +138,8 @@ public class AVLTree<T extends Comparable<? super T>>
     private BinaryNode<T> rotateRightLeft(BinaryNode<T> nodeN)
     {
         BinaryNode<T> nodeC = nodeN.getRightChild();
-
-        return nodeC;
-
+        nodeN.setRightChild(rotateRight(nodeC));
+        return rotateLeft(nodeN);
     } // end rotateRightLeft
 
     // Corrects an imbalance at the node closest to a structural
@@ -124,9 +149,8 @@ public class AVLTree<T extends Comparable<? super T>>
     private BinaryNode<T> rotateLeftRight(BinaryNode<T> nodeN)
     {
         BinaryNode<T> nodeC = nodeN.getLeftChild();
-
-        return nodeC;
-
+        nodeN.setLeftChild(rotateLeft(nodeC));
+        return rotateRight(nodeN);
     } // end rotateLeftRight
 
     // Returns the difference in heights of the given node's
