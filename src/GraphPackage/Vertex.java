@@ -2,8 +2,8 @@ package GraphPackage;
 
 
 
-import Week9_Complete.ADTPackage.LinkedListWithIterator;
-import Week9_Complete.ADTPackage.ListWithIteratorInterface;
+import ADTPackage.LinkedListWithIterator;
+import ADTPackage.ListWithIteratorInterface;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

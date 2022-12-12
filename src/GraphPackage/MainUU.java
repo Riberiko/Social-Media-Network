@@ -1,8 +1,8 @@
 package GraphPackage;
 
-import Week9_Complete.ADTPackage.LinkedStack;
-import Week9_Complete.ADTPackage.QueueInterface;
-import Week9_Complete.ADTPackage.StackInterface;
+import ADTPackage.LinkedStack;
+import ADTPackage.QueueInterface;
+import ADTPackage.StackInterface;
 
 public class MainUU {
     private static UndirectedGraph<String> myGraph = new UndirectedGraph<>();
