@@ -2,6 +2,9 @@ package GraphPackage;
 
 
 import ADTPackage.StackInterface;
+import Profile.Profile;
+
+import java.util.Iterator;
 
 public class UndirectedGraph<T> extends DirectedGraph<T> implements GraphInterface<T>
 {

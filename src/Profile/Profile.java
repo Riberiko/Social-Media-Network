@@ -13,31 +13,22 @@ public class Profile
     private String id;
     private String pic;
     private boolean isOnline;
-    private DictionaryInterface<String, Profile> friends;
-    private List<Profile> friendsList;
 
     public Profile(String name, String id)
     {
         this(name, id, false);
     }
 
-    public Profile(String name, String id, boolean isOnline)
-    {
-        this(name, id, isOnline, new UnsortedLinkedDictionary<String, Profile>());
+    public Profile(String pic, String id, String name){
+        this(name, id);
+        this.pic = pic;
     }
 
-    public Profile(String name, String id, boolean isOnline, UnsortedLinkedDictionary<String, Profile> friends)
+    public Profile(String name, String id, boolean isOnline)
     {
         this.name = name;
         this.id = id;
         this.isOnline = isOnline;
-        this.friends = friends;
-        friendsList = new ArrayList<Profile>();
-
-        Iterator<Profile> iter = friends.getValueIterator();
-        while(iter.hasNext()){
-            friendsList.add(iter.next());
-        }
     }
 
     public String getName()
@@ -49,19 +40,6 @@ public class Profile
         return id;
     }
 
-    public List<Profile> getFriends()
-    {
-        return friendsList;
-    }
-
-    public List<String> getFriendsId(){
-        List<String> temp = new ArrayList<>();
-        for(Profile p : getFriends()){
-            temp.add(p.getId());
-        }
-        return temp;
-    }
-
     public String getPic()
     {
         return pic;
@@ -71,24 +49,9 @@ public class Profile
         this.name = name;
     }
 
+    public void setPic(String pic){this.pic = pic;}
+
     public void setOnline(boolean online) {
         isOnline = online;
-    }
-
-    public void addFriend(String id, Profile profile){
-        friends.add(id, profile);
-        friendsList.add(profile);
-    }
-
-    public void removeFriend(String id, Profile profile){
-        friends.remove(id);
-        friendsList.remove(profile);
-    }
-
-    @Override
-    public String toString(){
-        String str = "";
-        str += "Name : "+name +"\n\t@"+ id + "\n\tisOnline : " + isOnline + "\n\tFriends : " +getFriendsId()+"\n";
-        return str;
     }
 }

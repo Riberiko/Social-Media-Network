@@ -75,4 +75,5 @@ public interface VertexInterface<T>
     /** Gets the recorded cost of the path to this vertex.
      @return  The cost of the path. */
     public double getCost();
+
 } // end VertexInterface

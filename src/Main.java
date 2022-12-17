@@ -1,23 +1,25 @@
+import GUI.FriendsFriends.Friends;
+import GUI.Main.MainFrame;
+import GUI.Users.UserFrame;
 import Profile.Profile;
 import Profile.ProfileManager;
 
 public class Main
 {
 
+    //Delete not working after add
+
     public static void main(String[] args)
     {
         ProfileManager manager = new ProfileManager();
+        MainFrame main = new MainFrame(manager);
+        manager.setAllUserPanel(main.users);
 
-        manager.addUser( new Profile("Riberiko Niyomwungere", "its.riko", true));
-        manager.addUser(new Profile("Athanase Nishemezwe","thenish17", false));
-        manager.addUser(new Profile("Cesariya Hatangima", "theces17", false));
+        manager.addUser(new Profile("alex.png", "hi","First"));
+        manager.addUser(new Profile("alex.png", "jk","Second"));
+        manager.addUser(new Profile("alex.png", "h","Third"));
 
-        manager.makeFriends("its.riko", "theces17");
-        manager.follow("its.riko", "thenish17");
-
-        manager.modifyUserName("its.riko", "Riko");
-
-        System.out.println(manager);
+        //System.out.println(manager);
     }
 
 }

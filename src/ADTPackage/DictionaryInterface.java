@@ -58,4 +58,5 @@ public interface DictionaryInterface<K, V>
    
    /** Removes all entries from this dictionary. */
    public void clear();
+
 } // end DictionaryInterface
